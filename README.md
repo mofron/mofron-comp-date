@@ -1,6 +1,7 @@
 # mofron-comp-date
 date web ui component for mofron
 
+# install
 ```bash
 npm install --save-dev mofron
 ```
