@@ -140,7 +140,7 @@
 	                if ('object' !== (typeof sel === 'undefined' ? 'undefined' : _typeof(sel))) {
 	                    throw new Error('invalid parameter');
 	                }
-	                this.vdom().getChild(0).text(sel.getFullYear() + '/' + sel.getMonth() + '/' + sel.getDate());
+	                this.vdom().getChild(0).text(sel.getFullYear() + '/' + (sel.getMonth() + 1) + '/' + sel.getDate());
 	                this.m_select = sel;
 	            } catch (e) {
 	                console.error(e.stack);

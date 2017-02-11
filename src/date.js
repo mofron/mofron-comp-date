@@ -72,7 +72,7 @@ mofron.comp.Date = class extends mofron.Component {
                 throw new Error('invalid parameter');
             }
             this.vdom().getChild(0).text(
-                sel.getFullYear() + '/' + sel.getMonth() + '/' + sel.getDate()
+                sel.getFullYear() + '/' + (sel.getMonth()+1) + '/' + sel.getDate()
             );
             this.m_select = sel;
         } catch (e) {
