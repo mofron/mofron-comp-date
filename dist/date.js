@@ -74,7 +74,6 @@
 	        try {
 	            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, prm));
 
-	            _this.setBaseName('Date');
 	            _this.name('Date');
 
 	            _this.m_select = null;

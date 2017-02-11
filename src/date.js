@@ -12,7 +12,6 @@ mofron.comp.Date = class extends mofron.Component {
     constructor (prm,opt) {
         try {
             super(prm);
-            this.setBaseName('Date');
             this.name('Date');
             
             this.m_select = null;
