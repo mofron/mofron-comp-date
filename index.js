@@ -40,7 +40,7 @@ mofron.comp.Date = class extends mofron.Component {
                 }
             }
             
-            this.vdom().addChild(new mofron.util.Vdom('div',this));
+            this.vdom().addChild(new mofron.util.Dom('div',this));
             this.select(def_dat);
         } catch (e) {
             console.error(e.stack);
