@@ -8,24 +8,6 @@
  * @brief Date Component class
  */
 mofron.comp.Date = class extends mofron.Component {
-    
-    constructor (prm,opt) {
-        try {
-            super(prm);
-            this.name('Date');
-            
-            this.m_select = null;
-            this.sel_evt  = null;
-            
-            if (null !== opt) {
-                this.option(opt);
-            }
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
     /**
      * initialize DOM contents
      * 
@@ -33,51 +15,133 @@ mofron.comp.Date = class extends mofron.Component {
      */
     initDomConts (prm) {
         try {
-            var def_dat = new Date();
-            if (null !== prm) {
-                if ('object' !== (typeof prm)) {
-                    def_dat = prm;
-                }
+            this.name('Date');
+            
+            if ((null !== prm) && ('object' !== typeof prm)) {
+                throw new Error('invalid parameter');
             }
             
-            this.vdom().addChild(new mofron.util.Dom('div',this));
-            this.select(def_dat);
+            this.vdom().addChild(new mofron.Dom('div',this));
+            this.date((null === prm) ? new Date() : prm);
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    selectEvent (fnc) {
+    date (dt) {
         try {
-            if (undefined === fnc) {
-                return this.sel_evt;
+            if (undefined === dt) {
+                /* getter */
+                return (undefined === this.m_date) ? new Date() : this.m_date;
             }
-            if ((null === fnc) || ('function' !== typeof fnc)) {
+            /* setter */
+            if ( (null === dt) || ('object' !== (typeof dt)) ) {
                 throw new Error('invalid parameter');
             }
-            this.sel_evt = fnc;
+            this.m_date = dt;
+            this.updConts();
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    select (sel) {
+    updConts () {
         try {
-            if (undefined === sel) {
-                return this.m_select;
-            }
-            if ('object' !== (typeof sel)) {
-                throw new Error('invalid parameter');
-            }
-            this.vdom().getChild(0).text(
-                sel.getFullYear() + '/' + (sel.getMonth()+1) + '/' + sel.getDate()
+            var dt = this.date();
+            this.target().text(
+                dt.getFullYear() + '/' + (dt.getMonth()+1) + '/' + dt.getDate()
             );
-            this.m_select = sel;
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    nextDay (offset) {
+        try {
+            if (undefined === offset) {
+                this.date().setDate(
+                    this.date().getDate()+1
+                );
+            } else {
+                if ('number' !== typeof offset) {
+                    throw new Error('invalid parameter');
+                }
+                this.date().setDate(
+                    this.date().getDate()+offset
+                );
+            }
+            this.updConts();
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    prevDay (offset) {
+        try {
+            if (undefined === offset) {
+                this.date().setDate(
+                    this.date().getDate()-1
+                );
+            } else {
+                if ('number' !== typeof offset) {
+                    throw new Error('invalid parameter');
+                }
+                this.date().setDate(
+                    this.date().getDate()-offset
+                );
+            }
+            this.updConts();
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    nextYear(offset) {
+        try {
+            if (undefined === offset) {
+                this.date().setYear(
+                    this.date().getFullYear()+1
+                );
+            } else {
+                if ('number' !== typeof offset) {
+                    throw new Error('invalid parameter');
+                }
+                this.date().setYear(
+                    this.date().getFullYear()+offset
+                );
+            }
+            this.updConts();
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    prevYear (offset) {
+        try {
+            if (undefined === offset) {
+                this.date().setYear(
+                    this.date().getFullYear()-1
+                );
+            } else {
+                if ('number' !== typeof offset) {
+                    throw new Error('invalid parameter');
+                }
+                this.date().setYear(
+                    this.date().getFullYear()-offset
+                );
+            }
+            this.updConts();
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
 }
+mofron.comp.date = {};
+module.exports   = mofron.comp.Date;

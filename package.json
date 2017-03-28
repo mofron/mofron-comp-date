@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-date",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "date component for mofron",
   "main": "index.js",
   "dependencies": {
